@@ -25,7 +25,7 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
-    AliasClassRepository aliasClassRepository;
+    private AliasClassRepository aliasClassRepository;
 
     /**
      * @描述 返回所有学生
@@ -43,7 +43,7 @@ public class StudentService {
      */
     public Student getStudentById(Integer uuid) {
         Optional<Student> opt = studentRepository.findById(uuid);
-        if (opt.isPresent()) {
+        if (opt != null && opt.isPresent()) {
             return opt.get();
         }
         return null;
@@ -55,6 +55,13 @@ public class StudentService {
      * @返回值 Student | null
      */
     public Student createStudent(Student student) {
+        // 如果要插入的班级不存在，则返回null
+        Optional<AliasClass> opt = aliasClassRepository.findById(student.getAliasClass().getUuid());
+
+        if (!opt.isPresent()) {
+            return null;
+        }
+
         // 判断逻辑上 唯一键
         Student result = studentRepository.findStudentByStudentNum(student.getStudentNum());
 
