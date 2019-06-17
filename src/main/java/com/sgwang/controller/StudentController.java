@@ -54,7 +54,7 @@ public class StudentController {
         Student result = studentService.createStudent(student);
         if (result == null) {
             String code = "404";
-            String msg = "插入Student失败！" + "  studentNum: " + student.getStudentNum() + " 已经存在！";
+            String msg = "插入Student失败！";
             return new Payload(null, code, msg);
         }
 
