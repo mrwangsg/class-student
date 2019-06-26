@@ -1,5 +1,6 @@
 package com.sgwang.controller;
 
+import com.sgwang.aop.annotation.LogAnnotation;
 import com.sgwang.model.AliasClass;
 import com.sgwang.service.AliasClassService;
 import com.sgwang.tool.Payload;
@@ -28,6 +29,7 @@ public class AliasClassController {
     @Autowired
     AliasClassService aliasClassService;
 
+    @LogAnnotation
     @GetMapping
     public Payload getAliasClassList() {
         List<AliasClass> result = aliasClassService.listAliasClass();

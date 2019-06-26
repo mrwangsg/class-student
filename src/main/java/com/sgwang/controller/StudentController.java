@@ -1,5 +1,6 @@
 package com.sgwang.controller;
 
+import com.sgwang.aop.annotation.LogAnnotation;
 import com.sgwang.model.Student;
 import com.sgwang.service.StudentService;
 import com.sgwang.tool.Payload;
@@ -28,6 +29,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    @LogAnnotation
     @GetMapping
     public Payload getStudentServiceList() {
         List<Student> studentList = studentService.listStudent();
